@@ -2,7 +2,7 @@
 
 This template allows the user to request on a AWS account the following infrastructure:
 
-- a Landing Zone
+- a VPC with Subnets and Internet gateway
 - a EKS Kubernetes engine cluster
 - a RDS MYSQL database
 
