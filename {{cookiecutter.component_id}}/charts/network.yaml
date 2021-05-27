@@ -9,7 +9,7 @@ spec:
     enableDnsSupport: true
     enableDnsHostNames: true
   providerConfigRef:
-    name: default
+    name: aws-stack-template-provider
 ---
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: InternetGateway
