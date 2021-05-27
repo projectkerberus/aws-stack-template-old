@@ -1,7 +1,7 @@
 apiVersion: identity.aws.crossplane.io/v1beta1
 kind: IAMRole
 metadata:
-  name: controlplane
+  name: {{cookiecutter.component_id}}-controlplane
 spec:
   forProvider:
     assumeRolePolicyDocument: |
@@ -21,23 +21,27 @@ spec:
             }
         ]
       }
+  providerConfigRef:
+    name: aws-stack-template-provider
 ---
 apiVersion: identity.aws.crossplane.io/v1beta1
 kind: IAMRolePolicyAttachment
 metadata:
-  name: controlplane
+  name: {{cookiecutter.component_id}}-controlplane
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
     roleNameRef:   
-     name: controlplane
+     name: {{cookiecutter.component_id}}-controlplane
+  providerConfigRef:
+    name: aws-stack-template-provider
 ---
 apiVersion: identity.aws.crossplane.io/v1beta1
 kind: IAMRole
 metadata:
-  name: noderole
+  name: {{cookiecutter.clusterRef}}-ng-noderole
   labels:
-    name: noderole
+    name: {{cookiecutter.clusterRef}}-ng-noderole
 spec:
   forProvider:
     assumeRolePolicyDocument: |
@@ -57,36 +61,44 @@ spec:
             }
         ]
       }
+  providerConfigRef:
+    name: aws-stack-template-provider
 ---
 apiVersion: identity.aws.crossplane.io/v1beta1
 kind: IAMRolePolicyAttachment
 metadata:
-  name: policy0
+  name: {{cookiecutter.clusterRef}}-ng-noderole-policy0
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
     roleNameSelector:
       matchLabels:
-        name: noderole
+        name: {{cookiecutter.clusterRef}}-ng-noderole
+  providerConfigRef:
+    name: aws-stack-template-provider
 ---
 apiVersion: identity.aws.crossplane.io/v1beta1
 kind: IAMRolePolicyAttachment
 metadata:
-  name: policy1
+  name: {{cookiecutter.clusterRef}}-ng-noderole-policy1
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
     roleNameSelector:
       matchLabels:
-        name: noderole
+        name: {{cookiecutter.clusterRef}}-ng-noderole
+  providerConfigRef:
+    name: aws-stack-template-provider
 ---
 apiVersion: identity.aws.crossplane.io/v1beta1
 kind: IAMRolePolicyAttachment
 metadata:
-  name: policy2
+  name: {{cookiecutter.clusterRef}}-ng-noderole-policy2
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
     roleNameSelector:
       matchLabels:
-        name: noderole
+        name: {{cookiecutter.clusterRef}}-ng-noderole
+  providerConfigRef:
+    name: aws-stack-template-provider
