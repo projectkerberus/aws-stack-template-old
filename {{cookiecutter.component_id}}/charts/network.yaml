@@ -20,6 +20,8 @@ spec:
     region: eu-central-1
     vpcIdRef:
       name: {{cookiecutter.networkRef}}
+  providerConfigRef:
+    name: aws-stack-template-provider
 ---
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: Subnet
@@ -36,6 +38,8 @@ spec:
     availabilityZone: eu-central-1a
     vpcIdRef:
       name: {{cookiecutter.networkRef}}
+  providerConfigRef:
+    name: aws-stack-template-provider
 ---
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: Subnet
@@ -52,6 +56,8 @@ spec:
     availabilityZone: eu-central-1b
     vpcIdRef:
       name: {{cookiecutter.networkRef}}
+  providerConfigRef:
+    name: aws-stack-template-provider
 ---
 apiVersion: ec2.aws.crossplane.io/v1alpha4
 kind: RouteTable
@@ -71,3 +77,5 @@ spec:
           name: {{cookiecutter.networkRef}}-sn0
       - subnetIdRef:
           name: {{cookiecutter.networkRef}}-sn1
+  providerConfigRef:
+    name: aws-stack-template-provider
