@@ -14,7 +14,7 @@ spec:
         - name: {{cookiecutter.networkRef}}-sn0
         - name: {{cookiecutter.networkRef}}-sn1
     roleArnRef:
-      name: controlplane
+      name: {{cookiecutter.component_id}}-controlplane
   writeConnectionSecretToRef:
-    name: eks-kubeconfig
+    name: {{cookiecutter.component_id}}-eks-kubeconfig
     namespace: crossplane-system
