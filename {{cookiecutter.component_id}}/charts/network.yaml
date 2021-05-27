@@ -1,7 +1,7 @@
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: VPC
 metadata:
-  name: aws-vpc
+  name: {{cookiecutter.networkRef}}
 spec:
   forProvider:
     region: eu-central-1
@@ -14,17 +14,17 @@ spec:
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: InternetGateway
 metadata:
-  name: aws-ig
+  name: {{cookiecutter.networkRef}}-ig
 spec:
   forProvider:
     region: eu-central-1
     vpcIdRef:
-      name: aws-vpc
+      name: {{cookiecutter.networkRef}}
 ---
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: Subnet
 metadata:
-  name: aws-subnet0
+  name: {{cookiecutter.networkRef}}-sn0
   labels:
     zone: eu-central-1a
     access: private
@@ -35,12 +35,12 @@ spec:
     cidrBlock: 10.1.1.0/24
     availabilityZone: eu-central-1a
     vpcIdRef:
-      name: aws-vpc
+      name: {{cookiecutter.networkRef}}
 ---
 apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: Subnet
 metadata:
-  name: aws-subnet1
+  name: {{cookiecutter.networkRef}}-sn1
   labels:
     zone: eu-central-1b
     access: private
@@ -51,23 +51,23 @@ spec:
     cidrBlock: 10.1.2.0/24
     availabilityZone: eu-central-1b
     vpcIdRef:
-      name: aws-vpc
+      name: {{cookiecutter.networkRef}}
 ---
 apiVersion: ec2.aws.crossplane.io/v1alpha4
 kind: RouteTable
 metadata:
-  name: aws-rt
+  name: {{cookiecutter.networkRef}}-rt
 spec:
   forProvider:
     region: eu-central-1
     vpcIdRef:
-      name: aws-vpc
+      name: {{cookiecutter.networkRef}}
     routes:
       - destinationCidrBlock: 0.0.0.0/0
         gatewayIdRef:
           name: aws-ig
     associations:
       - subnetIdRef:
-          name: aws-subnet0
+          name: {{cookiecutter.networkRef}}-sn0
       - subnetIdRef:
-          name: aws-subnet1
+          name: {{cookiecutter.networkRef}}-sn1
