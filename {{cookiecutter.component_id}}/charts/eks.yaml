@@ -18,3 +18,5 @@ spec:
   writeConnectionSecretToRef:
     name: {{cookiecutter.component_id}}-eks-kubeconfig
     namespace: crossplane-system
+  providerConfigRef:
+    name: aws-stack-template-provider
