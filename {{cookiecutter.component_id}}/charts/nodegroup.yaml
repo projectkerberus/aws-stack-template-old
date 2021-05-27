@@ -3,21 +3,21 @@
 apiVersion: eks.aws.crossplane.io/v1alpha1
 kind: NodeGroup
 metadata:
-  name: my-group
+  name: {{cookiecutter.clusterRef}}-np
 spec:
   forProvider:
     region: eu-central-1
     clusterNameRef:
-      name: crossplane-eks
+      name: {{cookiecutter.clusterRef}}
     scalingConfig:
-      minSize: 1
-      maxSize: 3
-      desiredSize: 1
+      minSize: {{cookiecutter.clusterNodesCount}}
+      maxSize: {{cookiecutter.clusterNodesCount}}
+      desiredSize: {{cookiecutter.clusterNodesCount}}
     instanceTypes:
       - t3.medium
     subnetRefs: 
-      - name: aws-subnet0
-      - name: aws-subnet1
+      - name: {{cookiecutter.networkRef}}-sn0
+      - name: {{cookiecutter.networkRef}}-sn1
     nodeRoleRef: 
-      name: noderole
+      name: {{cookiecutter.clusterRef}}-np-noderole
       
