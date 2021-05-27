@@ -11,8 +11,8 @@ spec:
       endpointPrivateAccess: true
       endpointPublicAccess: true
       subnetIdRefs:
-        - name: {{cookiecutter.networkRef}}0
-        - name: {{cookiecutter.networkRef}}1
+        - name: {{cookiecutter.networkRef}}-sn0
+        - name: {{cookiecutter.networkRef}}-sn1
     roleArnRef:
       name: controlplane
   writeConnectionSecretToRef:
