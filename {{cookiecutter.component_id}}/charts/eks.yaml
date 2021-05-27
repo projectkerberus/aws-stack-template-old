@@ -1,7 +1,9 @@
 apiVersion: eks.aws.crossplane.io/v1beta1
 kind: Cluster
 metadata:
-  name: crossplane-eks
+  name: {{cookiecutter.clusterRef}}
+  labels:
+    backstage.io/kubernetes-id: {{cookiecutter.component_id}}
 spec:
   forProvider:
     region: eu-central-1
@@ -9,8 +11,8 @@ spec:
       endpointPrivateAccess: true
       endpointPublicAccess: true
       subnetIdRefs:
-        - name: aws-subnet0
-        - name: aws-subnet1
+        - name: {{cookiecutter.networkRef}}0
+        - name: {{cookiecutter.networkRef}}1
     roleArnRef:
       name: controlplane
   writeConnectionSecretToRef:
