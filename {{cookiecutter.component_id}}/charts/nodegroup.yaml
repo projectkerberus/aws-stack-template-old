@@ -3,7 +3,7 @@
 apiVersion: eks.aws.crossplane.io/v1alpha1
 kind: NodeGroup
 metadata:
-  name: {{cookiecutter.clusterRef}}-np
+  name: {{cookiecutter.clusterRef}}-ng
 spec:
   forProvider:
     region: eu-central-1
@@ -19,5 +19,5 @@ spec:
       - name: {{cookiecutter.networkRef}}-sn0
       - name: {{cookiecutter.networkRef}}-sn1
     nodeRoleRef: 
-      name: {{cookiecutter.clusterRef}}-np-noderole
+      name: {{cookiecutter.clusterRef}}-ng-noderole
       
