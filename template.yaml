@@ -1,12 +1,12 @@
 apiVersion: backstage.io/v1alpha1
 kind: Template
 metadata:
-  name: gcp-template
-  title: Google Cloud Platform infrastructure template
-  description: Create a simple GCP stack
+  name: aws-template
+  title: Amazon Web Services infrastructure template
+  description: Create a simple AWS stack
   tags:
-    - gcp
-    - gke
+    - aws
+    - eks
 spec:
   owner: diego.braga86@gmail.com
   templater: cookiecutter
@@ -15,20 +15,18 @@ spec:
   schema:
     required:
       - component_id
+      - clusterRef
       - description
       - networkRef
-      - clusterRef
       - clusterNodesCount
-      - cloudSqlRef
-      - cloudSqlDatabaseVersion
-      - cloudSqlRegion
-      - cloudSqlTier
-      - cloudSqlDataDiskType
-      - cloudSqlDataDiskSizeGb
+      - rdsRef
+      - rdsRegion
+      - rdsDataDiskSizeGb
+      - rdsInstanceClass
+      - rdsEngineVersion
+      - rdsStorageType
       - argocd_url
       - argocd_token
-      - k8s_apiserver_url
-      - gcpProject
     properties:
       component_id:
         title: Name
@@ -51,35 +49,35 @@ spec:
         type: integer
         description: Number of nodes of the cluster per region
         default: 2
-      cloudSqlRef:
-        title: Cloud SQL identifier
+      rdsRef:
+        title: RDS identifier
         type: string
-        description: Cloud SQL identifier
-      cloudSqlDatabaseVersion:
+        description: RDS identifier
+      rdsRegion:
+        title: RDS region
+        type: string
+        description: RDS region
+        default: europe-west3
+      rdsDataDiskSizeGb:
+        title: RDS disk size (GB)
+        type: integer
+        description: RDS data disk size (GB)
+        default: 10
+      rdsInstanceClass:
+        title: RDS instance class
+        type: string
+        description: Cloud SQL tier
+        default: db-custom-1-3840
+      rdsEngineVersion:
         title: Cloud SQL Database version
         type: string
         description: Cloud SQL Database version
         default: POSTGRES_9_6
-      cloudSqlRegion:
-        title: Cloud SQL region
-        type: string
-        description: Cloud SQL region
-        default: europe-west3
-      cloudSqlTier:
-        title: Cloud SQL tier
-        type: string
-        description: Cloud SQL tier
-        default: db-custom-1-3840
-      cloudSqlDataDiskType:
+      rdsStorageType:
         title: Cloud SQL data disk type
         type: string
         description: Cloud SQL data disk type
         default: PD_SSD
-      cloudSqlDataDiskSizeGb:
-        title: Cloud SQL data disk size (GB)
-        type: integer
-        description: Cloud SQL data disk size (GB)
-        default: 10
       argocd_url:
         title: HTTPS url of ArgoCD
         type: string
@@ -88,12 +86,3 @@ spec:
         title: token for ArgoCD authentication
         type: string
         description: token for ArgoCD authentication
-      k8s_apiserver_url:
-        title: API Server URL of the Kubernetes cluster for Kerberus
-        type: string
-        description: API Server URL of the Kubernetes cluster for Kerberus
-        default: https://kubernetes.default.svc
-      gcpProject:
-        title: Google Project ID where resources will be created
-        type: string
-        description: Google Project ID where resources will be created
