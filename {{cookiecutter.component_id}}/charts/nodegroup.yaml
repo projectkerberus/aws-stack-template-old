@@ -20,4 +20,5 @@ spec:
       - name: {{cookiecutter.networkRef}}-sn1
     nodeRoleRef: 
       name: {{cookiecutter.clusterRef}}-ng-noderole
-      
+  providerConfigRef:
+    name: aws-stack-template-provider
