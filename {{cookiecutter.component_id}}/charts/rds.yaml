@@ -27,7 +27,7 @@ spec:
     storageEncrypted: false
     storageType: {{cookiecutter.rdsStorageType}}
   writeConnectionSecretToRef:
-    name: mysqlserver
+    name: rdspostgresql-conn
     namespace: crossplane-system
   providerConfigRef:
     name: aws-stack-template-provider
