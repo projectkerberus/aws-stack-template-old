@@ -16,13 +16,13 @@ spec:
     deletionProtection: false
     enableIAMDatabaseAuthentication: false
     enablePerformanceInsights: false
-    engine: mysql
+    engine: postgres
     engineVersion: {{cookiecutter.rdsEngineVersion}}
     licenseModel: general-public-license
     masterUsername: admin
     multiAZ: false
     skipFinalSnapshotBeforeDeletion: true
-    port: 3306
+    port: 5432
     publiclyAccessible: true
     storageEncrypted: false
     storageType: {{cookiecutter.rdsStorageType}}
