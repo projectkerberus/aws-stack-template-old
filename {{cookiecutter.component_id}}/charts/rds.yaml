@@ -18,8 +18,8 @@ spec:
     enablePerformanceInsights: false
     engine: postgres
     engineVersion: {{cookiecutter.rdsEngineVersion}}
-    licenseModel: general-public-license
-    masterUsername: admin
+    licenseModel: postgresql-license
+    masterUsername: amministratore
     multiAZ: false
     skipFinalSnapshotBeforeDeletion: true
     port: 5432
