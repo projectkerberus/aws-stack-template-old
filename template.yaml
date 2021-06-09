@@ -72,7 +72,7 @@ spec:
         title: Cloud SQL Database version
         type: string
         description: Cloud SQL Database version
-        default: 13.2
+        default: '13.2'
       rdsStorageType:
         title: Cloud SQL data disk type
         type: string
