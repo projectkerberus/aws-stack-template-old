@@ -17,7 +17,7 @@ spec:
     enableIAMDatabaseAuthentication: false
     enablePerformanceInsights: false
     engine: postgres
-    engineVersion: {{cookiecutter.rdsEngineVersion}}
+    engineVersion: {{cookiecutter.rdsEngineVersion | jsonify}}
     licenseModel: postgresql-license
     masterUsername: amministratore
     multiAZ: false
