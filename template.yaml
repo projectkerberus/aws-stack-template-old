@@ -57,7 +57,7 @@ spec:
         title: RDS region
         type: string
         description: RDS region
-        default: europe-west3
+        default: eu-central-1
       rdsDataDiskSizeGb:
         title: RDS disk size (GB)
         type: integer
@@ -67,17 +67,17 @@ spec:
         title: RDS instance class
         type: string
         description: Cloud SQL tier
-        default: db-custom-1-3840
+        default: db.t3.small
       rdsEngineVersion:
         title: Cloud SQL Database version
         type: string
         description: Cloud SQL Database version
-        default: POSTGRES_9_6
+        default: 13.2
       rdsStorageType:
         title: Cloud SQL data disk type
         type: string
         description: Cloud SQL data disk type
-        default: PD_SSD
+        default: standard
       argocd_url:
         title: HTTPS url of ArgoCD
         type: string
