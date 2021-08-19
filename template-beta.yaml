@@ -30,64 +30,64 @@ spec:
         - argocd_url
         - argocd_token
       properties:
-      component_id:
-        title: Name
-        type: string
-        description: Unique name of the component
-      description:
-        title: Description
-        type: string
-        description: Help others understand what this service does.
-      networkRef:
-        title: Network identifier
-        type: string
-        description: Network identifier
-      clusterRef:
-        title: Cluster identifier
-        type: string
-        description: Cluster identifier
-      clusterNodesCount:
-        title: Number of nodes of the cluster per region
-        type: integer
-        description: Number of nodes of the cluster per region
-        default: 2
-      rdsRef:
-        title: RDS identifier
-        type: string
-        description: RDS identifier
-      rdsRegion:
-        title: RDS region
-        type: string
-        description: RDS region
-        default: eu-central-1
-      rdsDataDiskSizeGb:
-        title: RDS disk size (GB)
-        type: integer
-        description: RDS data disk size (GB)
-        default: 10
-      rdsInstanceClass:
-        title: RDS instance class
-        type: string
-        description: Cloud SQL tier
-        default: db.t3.small
-      rdsEngineVersion:
-        title: Cloud SQL Database version
-        type: string
-        description: Cloud SQL Database version
-        default: "13.2"
-      rdsStorageType:
-        title: Cloud SQL data disk type
-        type: string
-        description: Cloud SQL data disk type
-        default: standard
-      argocd_url:
-        title: HTTPS url of ArgoCD
-        type: string
-        description: HTTPS url of ArgoCD
-      argocd_token:
-        title: token for ArgoCD authentication
-        type: string
-        description: token for ArgoCD authentication
+        component_id:
+          title: Name
+          type: string
+          description: Unique name of the component
+        description:
+          title: Description
+          type: string
+          description: Help others understand what this service does.
+        networkRef:
+          title: Network identifier
+          type: string
+          description: Network identifier
+        clusterRef:
+          title: Cluster identifier
+          type: string
+          description: Cluster identifier
+        clusterNodesCount:
+          title: Number of nodes of the cluster per region
+          type: integer
+          description: Number of nodes of the cluster per region
+          default: 2
+        rdsRef:
+          title: RDS identifier
+          type: string
+          description: RDS identifier
+        rdsRegion:
+          title: RDS region
+          type: string
+          description: RDS region
+          default: eu-central-1
+        rdsDataDiskSizeGb:
+          title: RDS disk size (GB)
+          type: integer
+          description: RDS data disk size (GB)
+          default: 10
+        rdsInstanceClass:
+          title: RDS instance class
+          type: string
+          description: Cloud SQL tier
+          default: db.t3.small
+        rdsEngineVersion:
+          title: Cloud SQL Database version
+          type: string
+          description: Cloud SQL Database version
+          default: "13.2"
+        rdsStorageType:
+          title: Cloud SQL data disk type
+          type: string
+          description: Cloud SQL data disk type
+          default: standard
+        argocd_url:
+          title: HTTPS url of ArgoCD
+          type: string
+          description: HTTPS url of ArgoCD
+        argocd_token:
+          title: token for ArgoCD authentication
+          type: string
+          description: token for ArgoCD authentication
 
     - title: Choose a location
       required:
