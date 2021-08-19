@@ -1,12 +1,12 @@
 apiVersion: backstage.io/v1beta2
 kind: Template
 metadata:
-  name: gcp-template
-  title: Google Cloud Platform infrastructure template
-  description: Create a simple GCP stack
+  name: aws-template
+  title: Amazon Web Services infrastructure template
+  description: Create a simple AWS stack
   tags:
-    - gcp
-    - gke
+    - aws
+    - eks
 spec:
   owner: diego.braga86@gmail.com
   templater: cookiecutter
@@ -14,90 +14,80 @@ spec:
 
   # these are the steps which are rendered in the frontend with the form input
   parameters:
-    - title: GCP stack values
+    - title: AWS stack values
       required:
         - component_id
+        - clusterRef
         - description
         - networkRef
-        - clusterRef
         - clusterNodesCount
-        - cloudSqlRef
-        - cloudSqlDatabaseVersion
-        - cloudSqlRegion
-        - cloudSqlTier
-        - cloudSqlDataDiskType
-        - cloudSqlDataDiskSizeGb
+        - rdsRef
+        - rdsRegion
+        - rdsDataDiskSizeGb
+        - rdsInstanceClass
+        - rdsEngineVersion
+        - rdsStorageType
         - argocd_url
         - argocd_token
-        - k8s_apiserver_url
-        - gcpProject
       properties:
-        component_id:
-          title: Name
-          type: string
-          description: Unique name of the component
-        description:
-          title: Description
-          type: string
-          description: Help others understand what this service does.
-        networkRef:
-          title: Network identifier
-          type: string
-          description: Network identifier
-        clusterRef:
-          title: Cluster identifier
-          type: string
-          description: Cluster identifier
-        clusterNodesCount:
-          title: Number of nodes of the cluster per region
-          type: integer
-          description: Number of nodes of the cluster per region
-          default: 2
-        cloudSqlRef:
-          title: Cloud SQL identifier
-          type: string
-          description: Cloud SQL identifier
-        cloudSqlDatabaseVersion:
-          title: Cloud SQL Database version
-          type: string
-          description: Cloud SQL Database version
-          default: POSTGRES_9_6
-        cloudSqlRegion:
-          title: Cloud SQL region
-          type: string
-          description: Cloud SQL region
-          default: europe-west3
-        cloudSqlTier:
-          title: Cloud SQL tier
-          type: string
-          description: Cloud SQL tier
-          default: db-custom-1-3840
-        cloudSqlDataDiskType:
-          title: Cloud SQL data disk type
-          type: string
-          description: Cloud SQL data disk type
-          default: PD_SSD
-        cloudSqlDataDiskSizeGb:
-          title: Cloud SQL data disk size (GB)
-          type: integer
-          description: Cloud SQL data disk size (GB)
-          default: 10
-        argocd_url:
-          title: HTTPS url of ArgoCD
-          type: string
-          description: HTTPS url of ArgoCD
-        argocd_token:
-          title: token for ArgoCD authentication
-          type: string
-          description: token for ArgoCD authentication
-        k8s_apiserver_url:
-          title: API Server URL of the Kubernetes cluster for Kerberus
-          type: string
-          description: API Server URL of the Kubernetes cluster for Kerberus
-        gcpProject:
-          title: Google Project ID where resources will be created
-          type: string
-          description: Google Project ID where resources will be created
+      component_id:
+        title: Name
+        type: string
+        description: Unique name of the component
+      description:
+        title: Description
+        type: string
+        description: Help others understand what this service does.
+      networkRef:
+        title: Network identifier
+        type: string
+        description: Network identifier
+      clusterRef:
+        title: Cluster identifier
+        type: string
+        description: Cluster identifier
+      clusterNodesCount:
+        title: Number of nodes of the cluster per region
+        type: integer
+        description: Number of nodes of the cluster per region
+        default: 2
+      rdsRef:
+        title: RDS identifier
+        type: string
+        description: RDS identifier
+      rdsRegion:
+        title: RDS region
+        type: string
+        description: RDS region
+        default: eu-central-1
+      rdsDataDiskSizeGb:
+        title: RDS disk size (GB)
+        type: integer
+        description: RDS data disk size (GB)
+        default: 10
+      rdsInstanceClass:
+        title: RDS instance class
+        type: string
+        description: Cloud SQL tier
+        default: db.t3.small
+      rdsEngineVersion:
+        title: Cloud SQL Database version
+        type: string
+        description: Cloud SQL Database version
+        default: "13.2"
+      rdsStorageType:
+        title: Cloud SQL data disk type
+        type: string
+        description: Cloud SQL data disk type
+        default: standard
+      argocd_url:
+        title: HTTPS url of ArgoCD
+        type: string
+        description: HTTPS url of ArgoCD
+      argocd_token:
+        title: token for ArgoCD authentication
+        type: string
+        description: token for ArgoCD authentication
 
     - title: Choose a location
       required:
@@ -119,37 +109,35 @@ spec:
       input:
         url: ./
         values:
-          component_id: '{{ parameters.component_id }}'
-          description: '{{ parameters.description }}'
-          networkRef: '{{ parameters.networkRef }}'
-          clusterRef: '{{ parameters.clusterRef }}'
-          clusterNodesCount: '{{ parameters.clusterNodesCount }}'
-          cloudSqlRef: '{{ parameters.cloudSqlRef }}'
-          cloudSqlDatabaseVersion: '{{ parameters.cloudSqlDatabaseVersion }}'
-          cloudSqlRegion: '{{ parameters.cloudSqlRegion }}'
-          cloudSqlTier: '{{ parameters.cloudSqlTier }}'
-          cloudSqlDataDiskType: '{{ parameters.cloudSqlDataDiskType }}'
-          cloudSqlDataDiskSizeGb: '{{ parameters.cloudSqlDataDiskSizeGb }}'
-          argocd_url: '{{ parameters.argocd_url }}'
-          argocd_token: '{{ parameters.argocd_token }}'
-          k8s_apiserver_url: '{{ parameters.k8s_apiserver_url }}'
-          gcpProject: '{{ parameters.gcpProject }}'
+          component_id: "{{ parameters.component_id }}"
+          description: "{{ parameters.description }}"
+          networkRef: "{{ parameters.networkRef }}"
+          clusterRef: "{{ parameters.clusterRef }}"
+          clusterNodesCount: "{{ parameters.clusterNodesCount }}"
+          rdsRef: "{{ parameters.rdsRef }}"
+          rdsRegion: "{{ parameters.rdsRegion }}"
+          rdsDataDiskSizeGb: "{{ parameters.rdsDataDiskSizeGb }}"
+          rdsInstanceClass: "{{ parameters.rdsInstanceClass }}"
+          rdsEngineVersion: "{{ parameters.rdsEngineVersion }}"
+          rdsStorageType: "{{ parameters.rdsStorageType }}"
+          argocd_url: "{{ parameters.argocd_url }}"
+          argocd_token: "{{ parameters.argocd_token }}"
 
     - id: publish
       name: Publish
       action: publish:github
       input:
-        allowedHosts: ['github.com']
-        description: 'This is a GCP stack with name {{ parameters.component_id }}'
-        repoUrl: '{{ parameters.repoUrl }}'
+        allowedHosts: ["github.com"]
+        description: "This is a AWS stack with name {{ parameters.component_id }}"
+        repoUrl: "{{ parameters.repoUrl }}"
 
     - id: register
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
-        catalogInfoPath: '/catalog-info.yaml'
+        repoContentsUrl: "{{ steps.publish.output.repoContentsUrl }}"
+        catalogInfoPath: "/catalog-info.yaml"
 
   output:
-    remoteUrl: '{{ steps.publish.output.remoteUrl }}'
-    entityRef: '{{ steps.register.output.entityRef }}'
+    remoteUrl: "{{ steps.publish.output.remoteUrl }}"
+    entityRef: "{{ steps.register.output.entityRef }}"
